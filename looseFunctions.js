@@ -58,3 +58,17 @@ const writeDataToJson = (dataObject, endpoint) => {
 endpoints.map(endpoint => getStarWarsData(baseURL + endpoint, endpoint))
 
 // getStarWarsData(baseURL + endpoints[1], endpoints[1])
+
+const createNewDataArray = (data) => {
+    let newDataArray = data.map((item, i) => {
+        // console.log(item)
+        let newObj = {
+            _id: (i + 1),
+            ...item
+        }
+        return newObj
+    })
+    return newDataArray
+}
+
+console.log(createNewDataArray(planetsData))
