@@ -1,6 +1,7 @@
 const fetch = require('node-fetch')
 const fs = require('fs');
-const { throws } = require('assert');
+
+
 
 class StarWarsApiScrapper {
     constructor() {
@@ -45,14 +46,25 @@ class StarWarsApiScrapper {
             this.getStarWarsData(fetchedData.next, endPoint)
         } else {
             this.data[endpointDataObjectKey].push(...fetchedData.results)
-            this.writeDataToJson(this.data[endpointDataObjectKey], endPoint)
+            this.addIdsToEachDataSetItem(this.data[endpointDataObjectKey], endPoint)
         }
     }
 
+    addIdsToEachDataSetItem = (data, endpoint) => {
+        let newDataArray = data.map((item, i) => {
+            // console.log(item)
+            let newObj = {
+                _id: (i + 1),
+                ...item
+            }
+            return newObj
+        })
+        this.writeDataToJson(newDataArray, endpoint)
+    }
     writeDataToJson = (dataObject, endpoint) => {
-        const fileName = `./data/${endpoint}Data.json`
+        const fileName = `./data/json/${endpoint}Data.json`
         const stringifiedData = JSON.stringify(dataObject)
-        let handleErr = (err) => err ? console.log(err) : console.log('Data written')
+        let handleErr = (err) => err ? console.log(err) : console.log(`Success! ${endpoint} Data has been written to ${fileName}`)
 
         fs.writeFile(fileName, stringifiedData, handleErr)
     }

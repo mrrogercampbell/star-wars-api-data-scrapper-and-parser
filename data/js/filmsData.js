@@ -1,4 +1,4 @@
-[
+let filmData = [
     {
         "title": "A New Hope",
         "episode_id": 4,
@@ -498,3 +498,5 @@
         "url": "http://swapi.dev/api/films/6/"
     }
 ]
+
+export default filmData
