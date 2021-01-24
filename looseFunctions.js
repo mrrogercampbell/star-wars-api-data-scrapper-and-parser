@@ -20,6 +20,9 @@ let data = {
     vehiclesData: []
 }
 
+endpoints.map(endpoint => getStarWarsData(baseURL + endpoint, endpoint))
+
+
 let getStarWarsData = async (url, endPoint) => {
     try {
         console.log('Request in progress...');
@@ -31,6 +34,8 @@ let getStarWarsData = async (url, endPoint) => {
         console.log('Fetch error: ', error);
     }
 }
+
+
 
 
 const checkIfNext = (endPoint, fetchedData) => {

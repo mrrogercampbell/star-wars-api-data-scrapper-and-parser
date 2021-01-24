@@ -31,11 +31,12 @@ let newFilmData = filmsData
 
 const filmsCharacterMatchUp = () => {
     filmsData.map(film => {
-        let { characters } = film
+        const { characters } = film
+        let character = film.characters
 
         characters.map((characterInFilm, characterIndex) => {
             peopleData.map(person => {
-                const { _id, name, url } = person
+                const { name, url } = person
                 if (characterInFilm === url) {
                     film.characters[characterIndex] = name
 
@@ -86,11 +87,13 @@ const personFilmMatchUp = () => {
 // Name of the property you want to use to fill nameOfPropertyToBeAltered with
 
 // Lets say you want to iterate over the Peoples data and fill every film with its proper name you would invoke the function like this:
-// dynamicMatchUp(peopleData, films, filmsData, title)
+// dynamicMatchUp(filmData, 'characters', peopleData, 'name')
 
 const dynamicMatchUp = (dataToBeAltered, nameOfPropertyToBeAltered, dataToBeCompared, dataToBeComparedNameProp) => {
+
     dataToBeAltered.map(singleAlteringData => {
         let propertyToBeIterated = singleAlteringData[nameOfPropertyToBeAltered]
+
         // console.log(propertyToBeIterated[0])
 
         propertyToBeIterated.map((alteringItem, alteringItemIndex) => {
@@ -120,8 +123,8 @@ const dynamicMatchUp = (dataToBeAltered, nameOfPropertyToBeAltered, dataToBeComp
     return dataToBeAltered
 }
 
-dynamicMatchUp(peopleData, 'films', filmsData, 'title')
-dynamicMatchUp(peopleData, 'vehicles', vehiclesData, 'name')
+// dynamicMatchUp(peopleData, 'films', filmsData, 'title')
+// dynamicMatchUp(peopleData, 'vehicles', vehiclesData, 'name')
 dynamicMatchUp(peopleData, 'vehicles', vehiclesData, 'name')
 
 
